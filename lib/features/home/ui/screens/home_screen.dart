@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/mydrawer.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -7,6 +9,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      drawer: const MyDrawer(),
       appBar: AppBar(
         title: const Text('Should ToDo'),
       ),
