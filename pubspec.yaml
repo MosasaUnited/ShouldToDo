@@ -47,6 +47,8 @@ dependencies:
   flutter_native_splash: ^2.4.0
   #fonts
   google_fonts: ^6.2.1
+  #database
+  sqflite: ^2.3.3
 
 dev_dependencies:
   flutter_test:

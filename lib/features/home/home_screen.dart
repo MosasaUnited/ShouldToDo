@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:should_todo/features/home/ui/screens/archived_tasks.dart';
+import 'package:should_todo/features/home/ui/screens/done_tasks.dart';
+import 'package:should_todo/features/home/ui/screens/tasks.dart';
+import 'package:sqflite/sqflite.dart';
 
-import '../widgets/mydrawer.dart';
+import 'ui/widgets/mydrawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,13 +16,28 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   static int currentIndex = 0;
 
+  List<Widget> screens = [
+    const Tasks(),
+    const DoneTasks(),
+    const ArchivedTasks()
+  ];
+
+  List<String> titles = ['Tasks', 'Done', 'Archived'];
+
+  @override
+  void initState() {
+    super.initState();
+
+    createDatabase();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: const MyDrawer(),
       appBar: AppBar(
-        title: const Text('Should ToDo'),
+        title: Text(titles[currentIndex]),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -44,9 +63,18 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.archive_outlined), label: 'Archived'),
         ],
       ),
-      body: const Center(
-        child: Text('Home Screen'),
-      ),
+      body: screens[currentIndex],
     );
+  }
+
+  void createDatabase() async {
+    Database database = await openDatabase('todo.db', version: 1,
+        onCreate: (database, version) async {
+      print('database created');
+      await database.execute(
+          'CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, date TEXT, time TEXT, status TEXT)');
+    }, onOpen: (database) {
+      print('database opened');
+    });
   }
 }

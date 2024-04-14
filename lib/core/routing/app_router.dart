@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:should_todo/features/home/ui/screens/home_screen.dart';
+import 'package:should_todo/features/home/home_screen.dart';
 
 abstract class AppRouter {
   static const kHomeView = '/';
