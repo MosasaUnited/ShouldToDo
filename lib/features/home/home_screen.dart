@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:should_todo/features/home/ui/screens/archived_tasks.dart';
 import 'package:should_todo/features/home/ui/screens/done_tasks.dart';
 import 'package:should_todo/features/home/ui/screens/tasks.dart';
+import 'package:should_todo/features/home/ui/screens/todo_screen.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'ui/widgets/mydrawer.dart';
@@ -24,6 +25,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<String> titles = ['Tasks', 'Done', 'Archived'];
 
+  Database? database;
+
+  bool showTodoScreen = false;
+
+  void toggleTodoScreen() {
+    setState(() {
+      showTodoScreen = !showTodoScreen;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -40,12 +51,24 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(titles[currentIndex]),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          toggleTodoScreen();
+        },
         backgroundColor: Colors.amber,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100.0),
         ),
-        child: const Icon(Icons.add),
+        child: showTodoScreen ? const Icon(Icons.close) : const Icon(Icons.add),
+      ),
+      body: Center(
+        child: showTodoScreen
+            ? const TodoScreen()
+            : const Text(
+                'Add a New TODO',
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -63,18 +86,31 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.archive_outlined), label: 'Archived'),
         ],
       ),
-      body: screens[currentIndex],
+      // body: screens[currentIndex],
     );
   }
 
   void createDatabase() async {
-    Database database = await openDatabase('todo.db', version: 1,
+    database = await openDatabase('todo.db', version: 1,
         onCreate: (database, version) async {
       print('database created');
       await database.execute(
           'CREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, date TEXT, time TEXT, status TEXT)');
     }, onOpen: (database) {
       print('database opened');
+    });
+  }
+
+  void insertToDatabase() {
+    database!.transaction((txn) async {
+      txn
+          .rawInsert(
+              'INSERT INTO tasks(title, date, time, status) VALUES("First Task", "258745", "12:00", "Active")')
+          .then((value) {
+        print('inserted Successfully');
+      }).catchError((error) {
+        print('Error When Inserting New Record ${error.toString()}');
+      });
     });
   }
 }
