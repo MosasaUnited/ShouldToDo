@@ -60,16 +60,16 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: showTodoScreen ? const Icon(Icons.close) : const Icon(Icons.add),
       ),
-      body: Center(
-        child: showTodoScreen
-            ? const TodoScreen()
-            : const Text(
-                'Add a New TODO',
-                style: TextStyle(
-                  fontSize: 30,
-                ),
-              ),
-      ),
+      // body: Center(
+      //   child: showTodoScreen
+      //       ? const TodoScreen()
+      //       : const Text(
+      //           'Add a New TODO',
+      //           style: TextStyle(
+      //             fontSize: 30,
+      //           ),
+      //         ),
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.archive_outlined), label: 'Archived'),
         ],
       ),
-      // body: screens[currentIndex],
+      body: showTodoScreen ? const TodoScreen() : screens[currentIndex],
     );
   }
 
