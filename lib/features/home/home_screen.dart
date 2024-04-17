@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.archive_outlined), label: 'Archived'),
         ],
       ),
-      body: showTodoScreen ? const TodoScreen() : screens[currentIndex],
+      body: showTodoScreen ? TodoScreen() : screens[currentIndex],
     );
   }
 

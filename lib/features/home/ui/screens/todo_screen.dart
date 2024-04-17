@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TodoScreen extends StatelessWidget {
-  const TodoScreen({super.key});
+  TodoScreen({super.key});
+
+  final pickTimeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         width: 350.h,
-        height: 250.h,
+        height: 300.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
           shape: BoxShape.rectangle,
@@ -28,8 +30,24 @@ class TodoScreen extends StatelessWidget {
               const TextField(
                 decoration: InputDecoration(hintText: 'Enter your TODO Item'),
               ),
+              TextField(
+                controller: pickTimeController,
+                decoration: const InputDecoration(hintText: 'Pick Time'),
+                onTap: () async {
+                  //await the Future returned by showTimePicker
+                  final selectTime = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+                  if (selectTime != null) {
+                    print(selectTime);
+                    final formattedTime = selectTime.format(context);
+                    pickTimeController.text = formattedTime;
+                  }
+                },
+              ),
               SizedBox(
-                height: 30.h,
+                height: 50.h,
               ),
               ElevatedButton(
                   onPressed: () {
