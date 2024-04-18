@@ -71,7 +71,6 @@ class TodoScreen extends StatelessWidget {
                     lastDate: DateTime.parse('2028-01-01'),
                   ).then((value) {
                     pickDateController.text = DateFormat.yMMMd().format(value!);
-                    print(value.toString());
                   });
                   if (selectDate != null) {}
                 },
