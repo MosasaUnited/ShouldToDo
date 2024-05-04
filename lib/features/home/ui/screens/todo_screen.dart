@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:should_todo/core/data/sqldb.dart';
 
-class TodoScreen extends StatelessWidget {
-  TodoScreen({super.key});
+class TodoScreen extends StatefulWidget {
+  const TodoScreen({super.key});
+
+  @override
+  State<TodoScreen> createState() => _TodoScreenState();
+}
+
+class _TodoScreenState extends State<TodoScreen> {
+  final titleController = TextEditingController();
 
   final pickTimeController = TextEditingController();
+
   final pickDateController = TextEditingController();
+
+  SqlDb sqlDb = SqlDb();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +41,7 @@ class TodoScreen extends StatelessWidget {
                 ),
               ),
               TextFormField(
+                controller: titleController,
                 decoration:
                     const InputDecoration(hintText: 'Enter your TODO Item'),
                 validator: (value) {
@@ -45,7 +57,6 @@ class TodoScreen extends StatelessWidget {
                 decoration: const InputDecoration(hintText: 'Pick Time'),
                 readOnly: true,
                 onTap: () async {
-                  //await the Future returned by showTimePicker
                   final selectTime = await showTimePicker(
                     context: context,
                     initialTime: TimeOfDay.now(),
@@ -63,7 +74,6 @@ class TodoScreen extends StatelessWidget {
                 decoration: const InputDecoration(hintText: 'Pick Date'),
                 readOnly: true,
                 onTap: () async {
-                  //await the Future returned by showTimePicker
                   final selectDate = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
@@ -79,10 +89,14 @@ class TodoScreen extends StatelessWidget {
                 height: 50.h,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    //   TODO: Implement functionality to add the todo item
-                  },
-                  child: const Text('Add TODO'))
+                onPressed: () async {
+                  int response = await sqlDb.insertData(
+                    "INERT INTO todo (title, date, time) VALUES ('${titleController.text}', '${pickDateController.text}', '${pickTimeController.text}')",
+                  );
+                  print(response);
+                },
+                child: const Text('Add TODO'),
+              ),
             ],
           ),
         ),
