@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:should_todo/features/home/ui/widgets/mydrawer.dart';
+import 'package:should_todo/core/widgets/mydrawer.dart';
 
-import '../home/ui/screens/todo_screen.dart';
+import 'ui/screens/todo_screen.dart';
 
 class Tasks extends StatefulWidget {
   const Tasks({super.key});

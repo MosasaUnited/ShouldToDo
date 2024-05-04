@@ -1,20 +1,20 @@
 import 'package:go_router/go_router.dart';
-import 'package:should_todo/features/home/home_screen.dart';
 
 import '../../features/archive/archived_tasks.dart';
 import '../../features/done/done_tasks.dart';
+import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/tasks/tasks.dart';
 
 abstract class AppRouter {
-  static const kHome = '/';
+  static const kOnboarding = '/';
   static const kDoneTasks = '/Done';
   static const kTasks = '/Tasks';
   static const kArchivedTasks = '/Archived';
 
   static final router = GoRouter(routes: [
     GoRoute(
-      path: kHome,
-      builder: (context, state) => HomeScreen(),
+      path: kOnboarding,
+      builder: (context, state) => const OnBoardingScreen(),
     ),
     GoRoute(
       path: kDoneTasks,
