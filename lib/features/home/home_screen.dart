@@ -9,8 +9,6 @@ class HomeScreen extends StatelessWidget {
 
   Icon menuIcon = const Icon(Icons.menu);
 
-  // List<String> titles = ['Tasks', 'Done', 'Archived'];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
