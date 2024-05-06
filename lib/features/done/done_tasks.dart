@@ -58,9 +58,16 @@ class _DoneTasksState extends State<DoneTasks> {
                       },
                     );
                   }
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      value: 0.6,
+                      color: Colors.amber,
+                      strokeWidth: 5,
+                    ),
+                  );
                 },
               ),
+
               // delete all database ( not recommended )
               // MaterialButton(
               //   onPressed: () async {

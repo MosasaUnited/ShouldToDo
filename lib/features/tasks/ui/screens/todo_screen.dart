@@ -19,112 +19,138 @@ class _TodoScreenState extends State<TodoScreen> {
 
   SqlDb sqlDb = SqlDb();
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 350.h,
-        height: 350.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
-          shape: BoxShape.rectangle,
-          color: Colors.blueGrey[100],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              const Text(
-                'Add a New TODO',
-                style: TextStyle(
-                  fontSize: 20,
+    return Form(
+      key: formKey,
+      child: Center(
+        child: Container(
+          width: 400.h,
+          height: 450.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+            shape: BoxShape.rectangle,
+            color: Colors.blueGrey[100],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                const Text(
+                  'Add a New TODO',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
-              ),
-              TextFormField(
-                controller: titleController,
-                decoration:
-                    const InputDecoration(hintText: 'Enter your TODO Item'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-              const Spacer(),
-              TextField(
-                controller: pickTimeController,
-                decoration: const InputDecoration(hintText: 'Pick Time'),
-                readOnly: true,
-                onTap: () async {
-                  final selectTime = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay.now(),
-                  );
-                  if (selectTime != null) {
-                    print(selectTime);
-                    final formattedTime = selectTime.format(context);
-                    pickTimeController.text = formattedTime;
-                  }
-                },
-              ),
-              const Spacer(),
-              TextField(
-                controller: pickDateController,
-                decoration: const InputDecoration(hintText: 'Pick Date'),
-                readOnly: true,
-                onTap: () async {
-                  final selectDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime.parse('2028-01-01'),
-                  ).then((value) {
-                    pickDateController.text = DateFormat.yMMMd().format(value!);
-                  });
-                  if (selectDate != null) {}
-                },
-              ),
-              SizedBox(
-                height: 50.h,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  int response = await sqlDb.insertData(
-                    "INSERT INTO todos (todo, time, date) VALUES ('${titleController.text}', '${pickTimeController.text}', '${pickDateController.text}')",
-                  );
-                  print('response ===================');
-                  print(response);
-                  if (response > 0 &&
-                      titleController.text.isNotEmpty &&
-                      pickTimeController.text.isNotEmpty &&
-                      pickDateController.text.isNotEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'TODO Added Successfully',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: Colors.green,
-                      ),
+                TextFormField(
+                  controller: titleController,
+                  decoration:
+                      const InputDecoration(hintText: 'Enter your TODO Item'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your TODO';
+                    }
+                    return null;
+                  },
+                ),
+                const Spacer(),
+                TextFormField(
+                  controller: pickTimeController,
+                  decoration: const InputDecoration(hintText: 'Pick Time'),
+                  readOnly: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please choose time';
+                    }
+                    return null;
+                  },
+                  onTap: () async {
+                    final selectTime = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay.now(),
                     );
-                  } else if (titleController.text.isEmpty ||
-                      pickTimeController.text.isEmpty ||
-                      pickDateController.text.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          'You have a Todo that you must finish',
-                          style: TextStyle(color: Colors.white),
+                    if (selectTime != null) {
+                      print(selectTime);
+                      final formattedTime = selectTime.format(context);
+                      pickTimeController.text = formattedTime;
+                    } else {
+                      print('Time not selected');
+                    }
+                  },
+                ),
+                const Spacer(),
+                TextFormField(
+                  controller: pickDateController,
+                  decoration: const InputDecoration(hintText: 'Pick Date'),
+                  readOnly: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please choose date';
+                    }
+                    return null;
+                  },
+                  onTap: () async {
+                    final selectDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.parse('2038-01-01'),
+                    ).then((value) {
+                      pickDateController.text =
+                          DateFormat.yMMMd().format(value!);
+                    });
+                    if (selectDate != null) {
+                      print(selectDate);
+                      final formattedDate = selectDate.format(context);
+                      pickDateController.text = formattedDate;
+                    } else {
+                      print('Date not selected');
+                    }
+                  },
+                ),
+                SizedBox(
+                  height: 50.h,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      int response = await sqlDb.insertData(
+                        "INSERT INTO todos (todo, time, date) VALUES ('${titleController.text}', '${pickTimeController.text}', '${pickDateController.text}')",
+                      );
+                      print('response ===================');
+                      print(response);
+                      if (response > 0 &&
+                          titleController.text.isNotEmpty &&
+                          pickTimeController.text.isNotEmpty &&
+                          pickDateController.text.isNotEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'TODO Added Successfully',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'You have a Todo that you must finish',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.redAccent,
                         ),
-                        backgroundColor: Colors.redAccent,
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Add TODO'),
-              ),
-            ],
+                      );
+                    }
+                  },
+                  child: const Text('Add TODO'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
