@@ -25,18 +25,22 @@ class SqlDb {
   }
 
   _onCreate(Database db, int version) async {
-    await db.execute('''CREATE TABLE "todos"(
-        "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT  , 
-        "todo" TEXT NOT NULL ,
-        "time" TEXT NOT NULL ,
-    )
-  ''');
+    await db.execute('''CREATE TABLE todos (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        todo TEXT NOT NULL,
+        time TEXT NOT NULL,
+        date TEXT NOT NULL )''');
 
     print('Create Database And Table ============ Done');
   }
 
-  _onUpgrade(Database db, int oldVersion, int newVersion) {
+  _onUpgrade(Database db, int oldVersion, int newVersion) async {
     print('onUpgrade ========================= Done');
+    // دى لما نبقا عاوزين نضيف Column على ال Table من غير ما نحذف الداتا كلها
+    // و نعمل Create من أول و جديد و لكن بشرط تغيير ال Version أولا
+    // ملاحظة مهمة : لن يتم استدعاء onUpgrade إلا فى حالة تغيير ال Ver.
+
+    // await db.execute("ALTER TABLE todos ADD COLUMN done INTEGER");
   }
 
   //SELECT DATABASE
@@ -65,5 +69,12 @@ class SqlDb {
     Database? myDb = await db;
     int response = await myDb!.rawDelete(sql);
     return response;
+  }
+
+  // DELETE ALL DATABASE لمسح الداتا بيز بالكامل ( not recommended )
+  myDeleteDatabase() async {
+    String databasePath = await getDatabasesPath();
+    String path = join(databasePath, 'mostafa.db');
+    await deleteDatabase(path);
   }
 }

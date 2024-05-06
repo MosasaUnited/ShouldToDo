@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:should_todo/core/widgets/mydrawer.dart';
 
 import 'ui/screens/todo_screen.dart';
@@ -52,40 +53,48 @@ class _TasksState extends State<Tasks> {
         ),
         child: showTodoScreen ? const Icon(Icons.close) : const Icon(Icons.add),
       ),
-      body: Center(
-        child: showTodoScreen
-            ? const TodoScreen()
-            : RichText(
-                textAlign: TextAlign.center,
-                text: const TextSpan(children: <TextSpan>[
-                  TextSpan(
-                    text: 'To Add a New Task Please Press the ',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
+      body: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Center(
+          child: showTodoScreen
+              ? const TodoScreen()
+              : RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'To Add a New Task Please Press the \n',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: GoogleFonts.aBeeZee().fontFamily,
+                          color: Colors.black,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '+ ',
+                        style: TextStyle(
+                          fontSize: 100,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: GoogleFonts.aBeeZee().fontFamily,
+                          color: Colors.yellowAccent,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '\nButton',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontStyle: FontStyle.italic,
+                          fontFamily: GoogleFonts.aBeeZee().fontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
                   ),
-                  TextSpan(
-                    text: '+ ',
-                    style: TextStyle(
-                      fontSize: 60,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.yellowAccent,
-                    ),
-                  ),
-                  TextSpan(
-                    text: '\nButton',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                ]),
-              ),
+                ),
+        ),
       ),
     );
   }
