@@ -91,9 +91,36 @@ class _TodoScreenState extends State<TodoScreen> {
               ElevatedButton(
                 onPressed: () async {
                   int response = await sqlDb.insertData(
-                    "INERT INTO todo (title, date, time) VALUES ('${titleController.text}', '${pickDateController.text}', '${pickTimeController.text}')",
+                    "INSERT INTO todos (todo, time, date) VALUES ('${titleController.text}', '${pickTimeController.text}', '${pickDateController.text}')",
                   );
+                  print('response ===================');
                   print(response);
+                  if (response > 0 &&
+                      titleController.text.isNotEmpty &&
+                      pickTimeController.text.isNotEmpty &&
+                      pickDateController.text.isNotEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'TODO Added Successfully',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  } else if (titleController.text.isEmpty ||
+                      pickTimeController.text.isEmpty ||
+                      pickDateController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'You have a Todo that you must finish',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.redAccent,
+                      ),
+                    );
+                  }
                 },
                 child: const Text('Add TODO'),
               ),

@@ -39,14 +39,6 @@ class _DoneTasksState extends State<DoneTasks> {
           alignment: Alignment.center,
           child: ListView(
             children: [
-              MaterialButton(
-                onPressed: () async {
-                  await sqlDb.myDeleteDatabase();
-                },
-                child: const Text('Delete Database'),
-                color: Colors.red,
-                textColor: Colors.white,
-              ),
               FutureBuilder(
                 future: readData(),
                 builder:
@@ -68,6 +60,15 @@ class _DoneTasksState extends State<DoneTasks> {
                   return const Center(child: CircularProgressIndicator());
                 },
               ),
+              // delte all database ( not recommended )
+              // MaterialButton(
+              //   onPressed: () async {
+              //     await sqlDb.myDeleteDatabase();
+              //   },
+              //   color: Colors.red,
+              //   textColor: Colors.white,
+              //   child: const Text('Delete All Database'),
+              // ),
             ],
           ),
         ),
