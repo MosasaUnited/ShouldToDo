@@ -32,6 +32,23 @@ class SqlDb {
         date TEXT NOT NULL )''');
 
     print('Create Database And Table ============ Done');
+
+    // إذا أردت أن ننشأ أكثر من داتا بيز واحدة يفضل أن نستخدم طريقة الـ batch
+
+    // Batch batch = db.batch();
+    // batch.execute('''CREATE TABLE todos (
+    //     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    //     todo TEXT NOT NULL,
+    //     time TEXT NOT NULL,
+    //     date TEXT NOT NULL )''');
+    //
+    // batch.execute('''
+    //     CREATE TABLE students (
+    //       id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    //       name TEXT NOT NULL,
+    //       age INTEGER NOT NULL,
+    //       phone TEXT NOT NULL )''');
+    // batch.commit();
   }
 
   _onUpgrade(Database db, int oldVersion, int newVersion) async {

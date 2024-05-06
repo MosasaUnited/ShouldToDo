@@ -14,8 +14,7 @@ class _DoneTasksState extends State<DoneTasks> {
   SqlDb sqlDb = SqlDb();
 
   Future<List<Map>> readData() async {
-    List<Map> response =
-        await sqlDb.selectData('SELECT * FROM todos WHERE done = 1');
+    List<Map> response = await sqlDb.selectData('SELECT * FROM todos');
     return response;
   }
 
@@ -52,6 +51,8 @@ class _DoneTasksState extends State<DoneTasks> {
                         return Card(
                           child: ListTile(
                             title: Text(snapshot.data![i]['todo']),
+                            subtitle: Text(snapshot.data![i]['time']),
+                            trailing: Text(snapshot.data![i]['date']),
                           ),
                         );
                       },
@@ -60,7 +61,7 @@ class _DoneTasksState extends State<DoneTasks> {
                   return const Center(child: CircularProgressIndicator());
                 },
               ),
-              // delte all database ( not recommended )
+              // delete all database ( not recommended )
               // MaterialButton(
               //   onPressed: () async {
               //     await sqlDb.myDeleteDatabase();
