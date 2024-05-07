@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:should_todo/core/data/sqldb.dart';
+import 'package:should_todo/core/routing/app_router.dart';
 
 import '../../core/widgets/mydrawer.dart';
 
@@ -52,7 +54,21 @@ class _DoneTasksState extends State<DoneTasks> {
                           child: ListTile(
                             title: Text(snapshot.data![i]['todo']),
                             subtitle: Text(snapshot.data![i]['time']),
-                            trailing: Text(snapshot.data![i]['date']),
+                            leading: Text(snapshot.data![i]['date']),
+                            trailing: IconButton(
+                              onPressed: () async {
+                                int response = await sqlDb.deleteData(
+                                    "DELETE FROM todos WHERE id = ${snapshot.data![i]['id']}");
+                                if (response > 0) {
+                                  GoRouter.of(context)
+                                      .push(AppRouter.kDoneTasks);
+                                }
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.redAccent,
+                              ),
+                            ),
                           ),
                         );
                       },
