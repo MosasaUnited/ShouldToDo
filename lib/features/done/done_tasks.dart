@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:should_todo/core/data/sqldb.dart';
 
 import '../../core/widgets/mydrawer.dart';
+import '../edit/edit_screen.dart';
 
 class DoneTasks extends StatefulWidget {
   const DoneTasks({super.key});
@@ -66,20 +67,43 @@ class _DoneTasksState extends State<DoneTasks> {
                             title: Text(todos[i]['todo']),
                             subtitle: Text(todos[i]['time']),
                             leading: Text(todos[i]['date']),
-                            trailing: IconButton(
-                              onPressed: () async {
-                                int response = await sqlDb.deleteData(
-                                    "DELETE FROM todos WHERE id = ${todos[i]['id']}");
-                                if (response > 0) {
-                                  todos.removeWhere((element) =>
-                                      element['id'] == todos[i]['id']);
-                                  setState(() {});
-                                }
-                              },
-                              icon: const Icon(
-                                Icons.delete,
-                                color: Colors.redAccent,
-                              ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => EditTasks(
+                                          todo: todos[i]['todo'],
+                                          time: todos[i]['time'],
+                                          date: todos[i]['date'],
+                                          id: todos[i]['id'],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    color: Colors.blueAccent,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () async {
+                                    int response = await sqlDb.deleteData(
+                                        "DELETE FROM todos WHERE id = ${todos[i]['id']}");
+                                    if (response > 0) {
+                                      todos.removeWhere((element) =>
+                                          element['id'] == todos[i]['id']);
+                                      setState(() {});
+                                    }
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.redAccent,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );
