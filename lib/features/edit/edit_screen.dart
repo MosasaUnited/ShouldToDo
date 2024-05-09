@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:should_todo/core/data/sqldb.dart';
+import 'package:should_todo/core/routing/app_router.dart';
 
 class EditTasks extends StatefulWidget {
   final String? todo;
@@ -37,7 +39,14 @@ class _EditTasksState extends State<EditTasks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              GoRouter.of(context).pop();
+            },
+            icon: const Icon(Icons.arrow_back_ios_new),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -94,12 +103,9 @@ class _EditTasksState extends State<EditTasks> {
                               initialTime: TimeOfDay.now(),
                             );
                             if (selectTime != null) {
-                              print(selectTime);
                               final formattedTime = selectTime.format(context);
                               pickTimeController.text = formattedTime;
-                            } else {
-                              print('Time not selected');
-                            }
+                            } else {}
                           },
                         ),
                         const Spacer(),
@@ -125,12 +131,9 @@ class _EditTasksState extends State<EditTasks> {
                                   DateFormat.yMMMd().format(value!);
                             });
                             if (selectDate != null) {
-                              print(selectDate);
                               final formattedDate = selectDate.format(context);
                               pickDateController.text = formattedDate;
-                            } else {
-                              print('Date not selected');
-                            }
+                            } else {}
                           },
                         ),
                         SizedBox(
@@ -141,17 +144,12 @@ class _EditTasksState extends State<EditTasks> {
                             if (formKey.currentState!.validate()) {
                               int response = await sqlDb.updateData('''
                           UPDATE todos SET
-                            todo = '${titleController.text}',
-                            time = '${pickTimeController.text}',
-                            date = '${pickDateController.text}' 
+                            todo = "${titleController.text}",
+                            time = "${pickTimeController.text}",
+                            date = "${pickDateController.text}" 
                             WHERE id = ${widget.id}
                             ''');
-                              print('response ===================');
-                              print(response);
-                              if (response > 0 &&
-                                  titleController.text.isNotEmpty &&
-                                  pickTimeController.text.isNotEmpty &&
-                                  pickDateController.text.isNotEmpty) {
+                              if (response > 0) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text(
@@ -161,7 +159,7 @@ class _EditTasksState extends State<EditTasks> {
                                     backgroundColor: Colors.green,
                                   ),
                                 );
-                                Navigator.of(context).pop();
+                                GoRouter.of(context).push(AppRouter.kDoneTasks);
                               }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
