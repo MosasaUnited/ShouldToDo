@@ -19,7 +19,7 @@ class SqlDb {
     String path = join(databasePath, 'mostafa.db');
 
     Database myDb = await openDatabase(path,
-        onCreate: _onCreate, version: 3, onUpgrade: _onUpgrade);
+        onCreate: _onCreate, version: 5, onUpgrade: _onUpgrade);
 
     return myDb;
   }
@@ -57,7 +57,7 @@ class SqlDb {
     // و نعمل Create من أول و جديد و لكن بشرط تغيير ال Version أولا
     // ملاحظة مهمة : لن يتم استدعاء onUpgrade إلا فى حالة تغيير ال Ver.
 
-    // await db.execute("ALTER TABLE todos ADD COLUMN done INTEGER");
+    // await db.execute("ALTER TABLE todos ADD COLUMN completed INTEGER");
   }
 
   //SELECT DATABASE

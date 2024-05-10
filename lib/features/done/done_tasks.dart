@@ -18,6 +18,8 @@ class _DoneTasksState extends State<DoneTasks> {
 
   bool isLoading = true;
 
+  bool? isChecked = false;
+
   Future readData() async {
     List<Map> response = await sqlDb.selectData('SELECT * FROM todos');
     todos.addAll(response);
@@ -70,6 +72,28 @@ class _DoneTasksState extends State<DoneTasks> {
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
+                                Checkbox(
+                                  value: todos[i]['completed'] == 1
+                                      ? true
+                                      : false, // Set checkbox value based on 'completed' field
+                                  onChanged: (bool? value) {
+                                    // Create a copy of the current todo item
+                                    final updatedTodo =
+                                        Map<String, dynamic>.from(todos[i]);
+                                    // Handle checkbox change
+                                    setState(() {
+                                      updatedTodo['completed'] = value!
+                                          ? 1
+                                          : 0; // Update 'completed' in the copy
+                                      todos[i] =
+                                          updatedTodo; // Replace the original item with the updated copy
+
+                                      // Update database with the changed value (implementation depends on your sqflite usage)
+                                      sqlDb.updateData(
+                                          "UPDATE todos SET completed = ${updatedTodo['completed']} WHERE id = ${updatedTodo['id']}");
+                                    });
+                                  },
+                                ),
                                 IconButton(
                                   onPressed: () {
                                     Navigator.of(context).push(
@@ -88,21 +112,21 @@ class _DoneTasksState extends State<DoneTasks> {
                                     color: Colors.blueAccent,
                                   ),
                                 ),
-                                IconButton(
-                                  onPressed: () async {
-                                    int response = await sqlDb.deleteData(
-                                        "DELETE FROM todos WHERE id = ${todos[i]['id']}");
-                                    if (response > 0) {
-                                      todos.removeWhere((element) =>
-                                          element['id'] == todos[i]['id']);
-                                      setState(() {});
-                                    }
-                                  },
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.redAccent,
-                                  ),
-                                ),
+                                // IconButton(
+                                //   onPressed: () async {
+                                //     int response = await sqlDb.deleteData(
+                                //         "DELETE FROM todos WHERE id = ${todos[i]['id']}");
+                                //     if (response > 0) {
+                                //       todos.removeWhere((element) =>
+                                //           element['id'] == todos[i]['id']);
+                                //       setState(() {});
+                                //     }
+                                //   },
+                                //   icon: const Icon(
+                                //     Icons.delete,
+                                //     color: Colors.redAccent,
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
