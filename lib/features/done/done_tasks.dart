@@ -77,7 +77,7 @@ class _DoneTasksState extends State<DoneTasks> {
                                       ? true
                                       : false, // Set checkbox value based on 'completed' field
                                   onChanged: (bool? value) {
-                                    // Create a copy of the current todo item
+                                    // Create a copy of the current to do item
                                     final updatedTodo =
                                         Map<String, dynamic>.from(todos[i]);
                                     // Handle checkbox change
