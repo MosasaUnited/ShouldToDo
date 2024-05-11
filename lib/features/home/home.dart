@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:should_todo/core/theming/images.dart';
 import 'package:should_todo/features/done/todo_tasks.dart';
 import 'package:should_todo/features/home/ui/widgets/exit_show_dialog.dart';
 import 'package:should_todo/features/tasks/add_tasks.dart';
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         leading: Padding(
           padding: const EdgeInsets.all(11.0),
           child: Image.asset(
-            'assets/icons/app_icon.png',
+            AppImages.appImage,
           ),
         ),
         actions: [
@@ -50,7 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     return const ExitShowDialog();
                   });
             },
-            icon: const Icon(Icons.exit_to_app),
+            icon: Image.asset(
+              AppImages.exitIconImage,
+              cacheHeight: 25,
+              cacheWidth: 25,
+            ),
           )
         ],
       ),
