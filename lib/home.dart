@@ -22,16 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
     const SettingsScreen(),
   ];
 
-  Widget buildBody() {
-    return AnimatedOpacity(
-      opacity: selectedIndex == 0 ? 1.0 : 0.0,
-      duration: const Duration(
-        microseconds: 900,
-      ),
-      child: pages.elementAt(selectedIndex),
-    );
-  }
-
   void onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
