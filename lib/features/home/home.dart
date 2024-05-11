@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:should_todo/features/done/todo_tasks.dart';
+import 'package:should_todo/features/home/ui/widgets/exit_show_dialog.dart';
 import 'package:should_todo/features/tasks/add_tasks.dart';
 
-import 'features/done_tasks/done_tasks.dart';
-import 'features/settings/settings_screen.dart';
+import '../done_tasks/done_tasks.dart';
+import '../settings/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,7 +34,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ShouldToDo'),
-        leading: const Icon(Icons.arrow_back_ios_new),
+        //TODO : leading
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const ExitShowDialog();
+                  });
+            },
+            icon: const Icon(Icons.exit_to_app),
+          )
+        ],
       ),
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
