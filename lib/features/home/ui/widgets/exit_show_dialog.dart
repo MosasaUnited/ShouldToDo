@@ -9,6 +9,7 @@ class ExitShowDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Exit Confirmation'),
+      icon: Icon(Icons.add_alert, color: Colors.amberAccent.shade700),
       content: const Text('Are you sure you want to exit ?'),
       actions: [
         TextButton(

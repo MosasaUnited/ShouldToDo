@@ -34,7 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ShouldToDo'),
-        //TODO : leading
+        centerTitle: true,
+        leading: Padding(
+          padding: const EdgeInsets.all(11.0),
+          child: Image.asset(
+            'assets/icons/app_icon.png',
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {

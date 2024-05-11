@@ -38,7 +38,7 @@ class SqlDb {
     // Batch batch = db.batch();
     // batch.execute('''CREATE TABLE todos (
     //     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    //     todo TEXT NOT NULL,
+    //     to do TEXT NOT NULL,
     //     time TEXT NOT NULL,
     //     date TEXT NOT NULL )''');
     //
