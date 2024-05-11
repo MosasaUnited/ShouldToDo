@@ -2,9 +2,9 @@ import 'package:go_router/go_router.dart';
 import 'package:should_todo/features/settings/settings_screen.dart';
 import 'package:should_todo/home.dart';
 
-import '../../features/archive/done_tasks.dart';
 import '../../features/done/todo_tasks.dart';
 import '../../features/done/ui/screens/edit_screen.dart';
+import '../../features/done_tasks/done_tasks.dart';
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/tasks/add_tasks.dart';
 

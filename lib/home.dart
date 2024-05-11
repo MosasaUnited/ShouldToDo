@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:should_todo/features/archive/done_tasks.dart';
 import 'package:should_todo/features/done/todo_tasks.dart';
 import 'package:should_todo/features/tasks/add_tasks.dart';
 
+import 'features/done_tasks/done_tasks.dart';
 import 'features/settings/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,6 +22,16 @@ class _HomeScreenState extends State<HomeScreen> {
     const SettingsScreen(),
   ];
 
+  Widget buildBody() {
+    return AnimatedOpacity(
+      opacity: selectedIndex == 0 ? 1.0 : 0.0,
+      duration: const Duration(
+        microseconds: 900,
+      ),
+      child: pages.elementAt(selectedIndex),
+    );
+  }
+
   void onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
@@ -36,16 +46,17 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Theme.of(context).textSelectionTheme.selectionColor,
+        selectedItemColor: Colors.blue.shade700,
         currentIndex: selectedIndex,
         onTap: onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.task_alt,
-                color: Colors.blueAccent,
-              ),
-              label: 'Add Task'),
+            icon: Icon(
+              Icons.task_alt,
+              color: Colors.blueAccent,
+            ),
+            label: 'Add Task',
+          ),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.today,
@@ -53,11 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               label: 'TODO Tasks'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.done_all,
-                color: Colors.blueAccent,
-              ),
-              label: 'Done Tasks'),
+            icon: Icon(
+              Icons.done_all,
+              color: Colors.blueAccent,
+            ),
+            label: 'Done Tasks',
+          ),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.settings,

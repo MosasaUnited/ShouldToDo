@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:should_todo/core/data/sqldb.dart';
-
-import '../../../../core/routing/app_router.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({super.key});
@@ -134,7 +131,6 @@ class _TodoScreenState extends State<TodoScreen> {
                             backgroundColor: Colors.green,
                           ),
                         );
-                        GoRouter.of(context).push(AppRouter.kDoneTasks);
                         setState(() {});
                       }
                     } else {
