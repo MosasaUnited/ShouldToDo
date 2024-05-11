@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ShouldToDo'),
+        leading: const Icon(Icons.arrow_back_ios_new),
       ),
       body: pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
