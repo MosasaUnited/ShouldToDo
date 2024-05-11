@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:should_todo/core/widgets/mydrawer.dart';
 
 import 'ui/screens/todo_screen.dart';
 
-class Tasks extends StatefulWidget {
-  const Tasks({super.key});
+class AddTasks extends StatefulWidget {
+  const AddTasks({super.key});
 
   @override
-  State<Tasks> createState() => _TasksState();
+  State<AddTasks> createState() => _AddTasksState();
 }
 
-class _TasksState extends State<Tasks> {
+class _AddTasksState extends State<AddTasks> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   bool showTodoScreen = false;
@@ -31,18 +30,6 @@ class _TasksState extends State<Tasks> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        title: const Text('Add New Task'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.arrow_back_ios)),
-        ],
-      ),
-      drawer: const MyDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           toggleTodoScreen();

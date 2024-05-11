@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:should_todo/core/data/sqldb.dart';
 
-import '../../core/widgets/mydrawer.dart';
-import '../edit/edit_screen.dart';
+import 'ui/screens/edit_screen.dart';
 
-class DoneTasks extends StatefulWidget {
-  const DoneTasks({super.key});
+class ToDoTasks extends StatefulWidget {
+  const ToDoTasks({super.key});
 
   @override
-  State<DoneTasks> createState() => _DoneTasksState();
+  State<ToDoTasks> createState() => _ToDoTasksState();
 }
 
-class _DoneTasksState extends State<DoneTasks> {
+class _ToDoTasksState extends State<ToDoTasks> {
   SqlDb sqlDb = SqlDb();
 
   List todos = [];
@@ -39,18 +38,6 @@ class _DoneTasksState extends State<DoneTasks> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Done Tasks'),
-          centerTitle: true,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back_ios)),
-          ],
-        ),
-        drawer: const MyDrawer(),
         body: isLoading == true
             ? const Center(
                 child: CircularProgressIndicator(),

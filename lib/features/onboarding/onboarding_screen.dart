@@ -67,7 +67,7 @@ class OnBoardingScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kTasks);
+                    GoRouter.of(context).push(AppRouter.kHome);
                   },
                   child: const Text(
                     'Get Started',
