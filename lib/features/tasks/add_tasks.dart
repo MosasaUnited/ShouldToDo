@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:should_todo/core/theming/lottie_assets.dart';
 
 import 'ui/screens/todo_screen.dart';
 
@@ -45,37 +48,36 @@ class _AddTasksState extends State<AddTasks> {
         child: Center(
           child: showTodoScreen
               ? const TodoScreen()
-              : RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'To Add a New Task Please Press the \n',
+              : Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'To Add a New Task Please \n Press the \n',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 22,
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.w500,
                           fontFamily: GoogleFonts.aBeeZee().fontFamily,
-                          color: Colors.black,
+                          color: Colors.black87,
                         ),
                       ),
-                      TextSpan(
-                        text: '+ ',
-                        style: TextStyle(
-                          fontSize: 100,
-                          fontWeight: FontWeight.w900,
-                          fontFamily: GoogleFonts.aBeeZee().fontFamily,
-                          color: Colors.yellowAccent,
-                        ),
+                      Lottie.asset(
+                        AppLottieAssets.floatingActionButtonAnimated,
+                        height: 200.h,
+                        width: 250.w,
                       ),
-                      TextSpan(
-                        text: '\nButton',
+                      Text(
+                        '\nButton',
                         style: TextStyle(
                           fontSize: 22,
                           fontStyle: FontStyle.italic,
-                          fontFamily: GoogleFonts.aBeeZee().fontFamily,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black,
+                          fontFamily: GoogleFonts.aBeeZee().fontFamily,
+                          color: Colors.black87,
                         ),
                       ),
                     ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import 'package:should_todo/core/theming/lottie_assets.dart';
 
 import '../../core/routing/app_router.dart';
 
@@ -20,7 +21,7 @@ class OnBoardingScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Lottie.asset('assets/lottie/onboarding_logo.json'),
+                Lottie.asset(AppLottieAssets.onBoardingAnimated),
                 SizedBox(
                   height: 30.h,
                 ),
