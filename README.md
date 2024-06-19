@@ -14,6 +14,9 @@ ShouldTODO is an application created using the **Flutter framework**. Its primar
     - Settings
 - The appbar displays the main icon of the program on the left and an exit icon on the right, which prompts a confirmation message when pressed.
 
+## Ongoing Developments
+Many more developments are currently in progress.
+
 ## Packages Used
 ```yaml
 flutter_screenutil: ^5.9.0
@@ -28,3 +31,5 @@ sqflite: ^2.3.3
 intl: ^0.19.0
 lottie: ^3.1.0
 shared_preferences: ^2.2.3
+
+
