@@ -1,7 +1,9 @@
+<img src="https://github.com/MosasaUnited/ShouldToDo/assets/79766907/b81af0c3-a405-4bd5-a6e7-fc956ec63b1a" width="100" height="100">
+
 # ShouldTODO Application
 
 ## About The App
-ShouldTODO is an application created using the **Flutter framework**. Its primary function is to note down tasks that need to be done at future dates, specifying the day and even down to the hour and minute. It also allows reviewing completed tasks. Data is stored locally using **sqflite**.
+ShouldTODO is an application created using the **Flutter framework**. Its primary function is to note down tasks that need to be done at future dates, specifying the day and even down to the hour and minute. It also allows reviewing completed tasks. Data is stored locally using **SQLite**.
 
 ## Features
 - Add tasks through a **floating action button**.
@@ -12,7 +14,7 @@ ShouldTODO is an application created using the **Flutter framework**. Its primar
     - TODO Tasks
     - Done Tasks
     - Settings
-- The appbar displays the main icon of the program on the left and an exit icon on the right, which prompts a confirmation message when pressed.
+- The appbar displays the program's main icon on the left and an exit icon on the right, which prompts a confirmation message when pressed.
 
 ## Ongoing Developments
 Many more developments are currently in progress.
