@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:should_todo/core/theming/images.dart';
-import 'package:should_todo/features/done/todo_tasks.dart';
 import 'package:should_todo/features/home/ui/widgets/exit_show_dialog.dart';
 import 'package:should_todo/features/tasks/add_tasks.dart';
 
 import '../done_tasks/done_tasks.dart';
 import '../settings/settings_screen.dart';
+import '../todo_tasks/todo_tasks.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('ShouldToDo'),
         centerTitle: true,
         leading: Padding(
-          padding: const EdgeInsets.all(11.0),
+          padding: const EdgeInsets.all(8.0),
           child: Image.asset(
             AppImages.appImage,
           ),
@@ -46,10 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             onPressed: () {
               showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const ExitShowDialog();
-                  });
+                context: context,
+                builder: (BuildContext context) {
+                  return const ExitShowDialog();
+                },
+              );
             },
             icon: Image.asset(
               AppImages.exitIconImage,

@@ -2,11 +2,11 @@ import 'package:go_router/go_router.dart';
 import 'package:should_todo/features/home/home.dart';
 import 'package:should_todo/features/settings/settings_screen.dart';
 
-import '../../features/done/todo_tasks.dart';
-import '../../features/done/ui/screens/edit_screen.dart';
 import '../../features/done_tasks/done_tasks.dart';
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/tasks/add_tasks.dart';
+import '../../features/todo_tasks/todo_tasks.dart';
+import '../../features/todo_tasks/ui/screens/edit_screen.dart';
 
 abstract class AppRouter {
   static const kOnboarding = '/';
@@ -44,7 +44,7 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: kSettings,
-      builder: (context, state) => const SettingsScreen(),
+      builder: (context, state) => SettingsScreen(),
     ),
   ]);
 }

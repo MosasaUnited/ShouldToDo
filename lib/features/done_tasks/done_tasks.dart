@@ -10,7 +10,9 @@ class DoneTasks extends StatelessWidget {
         body: Center(
           child: Text(
             'Done Tasks',
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(
+              fontSize: 40,
+            ),
           ),
         ),
       ),

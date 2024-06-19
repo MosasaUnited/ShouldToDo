@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:should_todo/core/data/sqldb.dart';
+import 'package:should_todo/core/theming/lottie_assets.dart';
 
 import 'ui/screens/edit_screen.dart';
 
@@ -39,8 +42,9 @@ class _ToDoTasksState extends State<ToDoTasks> {
     return SafeArea(
       child: Scaffold(
         body: isLoading == true
-            ? const Center(
-                child: CircularProgressIndicator(),
+            ? Center(
+                child: Lottie.asset(AppLottieAssets.loading,
+                    height: 150.h, width: 150.w),
               )
             : Container(
                 alignment: Alignment.center,
