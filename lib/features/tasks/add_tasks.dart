@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:should_todo/core/theming/lottie_assets.dart';
 
+import '../../core/theming/images.dart';
 import 'ui/screens/todo_screen.dart';
 
 class AddTasks extends StatefulWidget {
@@ -55,7 +54,7 @@ class _AddTasksState extends State<AddTasks> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'To Add a New Task Please \n Press the \n',
+                        'To Add a New Task Please \n Press this Button',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 22,
@@ -65,20 +64,10 @@ class _AddTasksState extends State<AddTasks> {
                           color: Colors.black87,
                         ),
                       ),
-                      Lottie.asset(
-                        AppLottieAssets.floatingActionButtonAnimated,
+                      Image.asset(
+                        AppImages.arrowDownImage,
                         height: 200.h,
                         width: 250.w,
-                      ),
-                      Text(
-                        '\nButton',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: GoogleFonts.aBeeZee().fontFamily,
-                          color: Colors.black87,
-                        ),
                       ),
                     ],
                   ),
