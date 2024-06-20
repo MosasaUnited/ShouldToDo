@@ -19,6 +19,17 @@ ShouldTODO is an application created using the **Flutter framework**. Its primar
 ## Ongoing Developments
 Many more developments are currently in progress.
 
+<div>
+<img src="https://github.com/MosasaUnited/ShouldToDo/assets/79766907/06a9696b-c36b-4351-99d3-d13068dd1047" width="317" height="567">
+<img src="https://github.com/MosasaUnited/ShouldToDo/assets/79766907/315ea9a6-5b22-4f1a-91d4-4275d6d42049" width="317" height="567">
+<img src="https://github.com/MosasaUnited/ShouldToDo/assets/79766907/ec416486-dff7-4cac-a14e-b20793ac3654" width="317" height="567">
+<img src="https://github.com/MosasaUnited/ShouldToDo/assets/79766907/d58f6ca0-109c-4210-9e2f-ed37ce40e2ee" width="317" height="567">
+<img src="https://github.com/MosasaUnited/ShouldToDo/assets/79766907/32030e12-5ae8-4240-ad1b-8ed07c86023d" width="317" height="567">
+<img src="https://github.com/MosasaUnited/ShouldToDo/assets/79766907/d18df56e-8434-4de1-8e77-5273836d5f97" width="317" height="567">
+<img src="https://github.com/MosasaUnited/ShouldToDo/assets/79766907/014d1e38-f777-4d6b-9218-7aaf22e4ac23" width="317" height="567">
+<img src="https://github.com/MosasaUnited/ShouldToDo/assets/79766907/e9aa7174-58ff-470d-bfe1-99a0ecd74aa9" width="317" height="567">
+</div>
+
 ## Packages Used
 ```yaml
 flutter_screenutil: ^5.9.0
